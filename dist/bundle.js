@@ -23554,15 +23554,15 @@ var _TodoList = __webpack_require__(85);
 
 var _TodoList2 = _interopRequireDefault(_TodoList);
 
-var _StartCountDown = __webpack_require__(86);
+var _StartCountDown = __webpack_require__(87);
 
 var _StartCountDown2 = _interopRequireDefault(_StartCountDown);
 
-var _EndCountDown = __webpack_require__(87);
+var _EndCountDown = __webpack_require__(88);
 
 var _EndCountDown2 = _interopRequireDefault(_EndCountDown);
 
-var _User = __webpack_require__(88);
+var _User = __webpack_require__(89);
 
 var _User2 = _interopRequireDefault(_User);
 
@@ -24185,6 +24185,10 @@ var _Router = __webpack_require__(11);
 
 var _Router2 = _interopRequireDefault(_Router);
 
+var _TodoItem = __webpack_require__(86);
+
+var _TodoItem2 = _interopRequireDefault(_TodoItem);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24196,13 +24200,49 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var TodoList = function (_React$Component) {
 	_inherits(TodoList, _React$Component);
 
-	function TodoList() {
+	function TodoList(props) {
 		_classCallCheck(this, TodoList);
 
-		return _possibleConstructorReturn(this, (TodoList.__proto__ || Object.getPrototypeOf(TodoList)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (TodoList.__proto__ || Object.getPrototypeOf(TodoList)).call(this, props));
+
+		_this.state = {
+			todoItems: [{ id: 1, data: "Item 1" }, { id: 2, data: "Item 2" }],
+			inputValue: ''
+		};
+		return _this;
 	}
 
 	_createClass(TodoList, [{
+		key: 'handleChange',
+		value: function handleChange(e) {
+			this.setState({
+				inputValue: e.target.value
+			});
+		}
+	}, {
+		key: 'handleSubmit',
+		value: function handleSubmit(e) {
+			console.log('print out value:' + this.state.inputValue);
+
+			var items = this.state.todoItems;
+			items.push({
+				id: items.length + 1,
+				data: this.state.inputValue
+			});
+
+			this.setState({
+				todoItems: items,
+				inputValue: ''
+			});
+
+			for (var i = 0; i < items.length; i++) {
+				console.log('todoitem id:' + items[i].id);
+				console.log('todoitem data:' + items[i].data);
+			};
+
+			e.preventDefault();
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
@@ -24213,6 +24253,29 @@ var TodoList = function (_React$Component) {
 					'h1',
 					null,
 					'TodoList'
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'form',
+						{ onSubmit: this.handleSubmit.bind(this) },
+						_react2.default.createElement(
+							'label',
+							null,
+							_react2.default.createElement('input', { type: 'text',
+								value: this.state.inputValue,
+								placeholder: 'Enter something..',
+								onChange: this.handleChange.bind(this)
+							}),
+							_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+						)
+					),
+					_react2.default.createElement(
+						'ul',
+						null,
+						_react2.default.createElement(_TodoItem2.default, { items: this.state.todoItems })
+					)
 				)
 			);
 		}
@@ -24225,6 +24288,63 @@ exports.default = TodoList;
 
 /***/ }),
 /* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TodoItem = function (_React$Component) {
+	_inherits(TodoItem, _React$Component);
+
+	function TodoItem() {
+		_classCallCheck(this, TodoItem);
+
+		return _possibleConstructorReturn(this, (TodoItem.__proto__ || Object.getPrototypeOf(TodoItem)).apply(this, arguments));
+	}
+
+	_createClass(TodoItem, [{
+		key: 'render',
+		value: function render() {
+			var items = this.props.items;
+			return _react2.default.createElement(
+				'div',
+				null,
+				items.map(function (items) {
+					return _react2.default.createElement(
+						'li',
+						{ key: items.id },
+						items.data
+					);
+				})
+			);
+		}
+	}]);
+
+	return TodoItem;
+}(_react2.default.Component);
+
+exports.default = TodoItem;
+
+/***/ }),
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24315,7 +24435,7 @@ var StartCountDown = function (_React$Component) {
 exports.default = StartCountDown;
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24374,7 +24494,7 @@ var EndCountDown = function (_React$Component) {
 exports.default = EndCountDown;
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
