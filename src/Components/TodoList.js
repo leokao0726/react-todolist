@@ -16,17 +16,21 @@ class TodoList extends React.Component {
 			],
 			inputValue: ''
 		}
+		
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleRemoveClick = this.handleRemoveClick.bind(this);
 	}
 	
 	handleChange(e){
+
 		this.setState({
 			inputValue: e.target.value
 		})
 	}
 
 	handleSubmit(e){
-		console.log('print out value:' + this.state.inputValue);
-		
+		// console.log('print out value:' + this.state.inputValue);
 		const items = this.state.todoItems;
 		items.push({
 			id: items.length + 1,
@@ -38,35 +42,46 @@ class TodoList extends React.Component {
 			inputValue: ''
 		})
 		
-		for(var i=0;i<items.length; i++){
-			console.log('todoitem id:' + items[i].id);
-			console.log('todoitem data:' + items[i].data);
-		};
-		
 		e.preventDefault();
 	}
 
+	handleRemoveClick(index: nubmer){
+
+		const oldItems = this.state.todoItems
+		// console.log('is clicked' + index)
+		const newItems = oldItems.slice(0,index).concat(oldItems.slice(index+1))
+
+		this.setState({
+			todoItems: newItems
+		})
+	}
+
 	render(){
+		const items = this.state.todoItems
+
 		return(
 			<div>
 				<Router />
 				<h1>TodoList</h1>
 				<div>
-					<form onSubmit={this.handleSubmit.bind(this)}>
+					<form onSubmit={this.handleSubmit}>
 						<label>
 							<input type="text"
 								value={this.state.inputValue}
 								placeholder='Enter something..'
-								onChange={this.handleChange.bind(this)}
+								onChange={this.handleChange}
 							/>
 							<input type="submit" value="Submit" />
 						</label>
 					</form>
 					<ul>
-						<TodoItem items={this.state.todoItems} />
+						{
+							items.map((items, index) => {
+								return <TodoItem key={items.id} data={items.data} index={index} onClick={this.handleRemoveClick} />
+							})
+						}
 					</ul>
 				</div>
-				
 			</div>
 		)
 	}

@@ -24209,12 +24209,17 @@ var TodoList = function (_React$Component) {
 			todoItems: [{ id: 1, data: "Item 1" }, { id: 2, data: "Item 2" }],
 			inputValue: ''
 		};
+
+		_this.handleChange = _this.handleChange.bind(_this);
+		_this.handleSubmit = _this.handleSubmit.bind(_this);
+		_this.handleRemoveClick = _this.handleRemoveClick.bind(_this);
 		return _this;
 	}
 
 	_createClass(TodoList, [{
 		key: 'handleChange',
 		value: function handleChange(e) {
+
 			this.setState({
 				inputValue: e.target.value
 			});
@@ -24222,8 +24227,7 @@ var TodoList = function (_React$Component) {
 	}, {
 		key: 'handleSubmit',
 		value: function handleSubmit(e) {
-			console.log('print out value:' + this.state.inputValue);
-
+			// console.log('print out value:' + this.state.inputValue);
 			var items = this.state.todoItems;
 			items.push({
 				id: items.length + 1,
@@ -24235,16 +24239,27 @@ var TodoList = function (_React$Component) {
 				inputValue: ''
 			});
 
-			for (var i = 0; i < items.length; i++) {
-				console.log('todoitem id:' + items[i].id);
-				console.log('todoitem data:' + items[i].data);
-			};
-
 			e.preventDefault();
+		}
+	}, {
+		key: 'handleRemoveClick',
+		value: function handleRemoveClick(index) {
+
+			var oldItems = this.state.todoItems;
+			// console.log('is clicked' + index)
+			var newItems = oldItems.slice(0, index).concat(oldItems.slice(index + 1));
+
+			this.setState({
+				todoItems: newItems
+			});
 		}
 	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
+			var items = this.state.todoItems;
+
 			return _react2.default.createElement(
 				'div',
 				null,
@@ -24259,14 +24274,14 @@ var TodoList = function (_React$Component) {
 					null,
 					_react2.default.createElement(
 						'form',
-						{ onSubmit: this.handleSubmit.bind(this) },
+						{ onSubmit: this.handleSubmit },
 						_react2.default.createElement(
 							'label',
 							null,
 							_react2.default.createElement('input', { type: 'text',
 								value: this.state.inputValue,
 								placeholder: 'Enter something..',
-								onChange: this.handleChange.bind(this)
+								onChange: this.handleChange
 							}),
 							_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
 						)
@@ -24274,7 +24289,9 @@ var TodoList = function (_React$Component) {
 					_react2.default.createElement(
 						'ul',
 						null,
-						_react2.default.createElement(_TodoItem2.default, { items: this.state.todoItems })
+						items.map(function (items, index) {
+							return _react2.default.createElement(_TodoItem2.default, { key: items.id, data: items.data, index: index, onClick: _this2.handleRemoveClick });
+						})
 					)
 				)
 			);
@@ -24323,17 +24340,14 @@ var TodoItem = function (_React$Component) {
 	_createClass(TodoItem, [{
 		key: 'render',
 		value: function render() {
-			var items = this.props.items;
+			var _this2 = this;
+
 			return _react2.default.createElement(
-				'div',
-				null,
-				items.map(function (items) {
-					return _react2.default.createElement(
-						'li',
-						{ key: items.id },
-						items.data
-					);
-				})
+				'li',
+				{ onClick: function onClick() {
+						_this2.props.onClick(_this2.props.index);
+					} },
+				this.props.data
 			);
 		}
 	}]);
