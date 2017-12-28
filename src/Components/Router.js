@@ -8,7 +8,8 @@ class Router extends React.Component {
 
 	render(){
 		return (
-			<ul className="list">
+			<div className="nav">
+				<ul className="list">
 				<li>
 					<Link to="/">Home</Link>
 				</li>
@@ -28,6 +29,7 @@ class Router extends React.Component {
 					<Link to="/user/Jane">Designer</Link>
 				</li>
 			</ul>
+			</div>
 			
 		)
 	}

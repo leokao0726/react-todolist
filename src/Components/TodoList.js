@@ -60,7 +60,7 @@ class TodoList extends React.Component {
 		const items = this.state.todoItems
 
 		return(
-			<div>
+			<div className="todolist-background">
 				<Router />
 				<h1>TodoList</h1>
 				<div>

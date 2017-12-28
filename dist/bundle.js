@@ -866,60 +866,64 @@ var Router = function (_React$Component) {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
-				'ul',
-				{ className: 'list' },
+				'div',
+				{ className: 'nav' },
 				_react2.default.createElement(
-					'li',
-					null,
+					'ul',
+					{ className: 'list' },
 					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: '/' },
-						'Home'
-					)
-				),
-				_react2.default.createElement(
-					'li',
-					null,
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouterDom.Link,
+							{ to: '/' },
+							'Home'
+						)
+					),
 					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: '/todolist' },
-						'TodoList'
-					)
-				),
-				_react2.default.createElement(
-					'li',
-					null,
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouterDom.Link,
+							{ to: '/todolist' },
+							'TodoList'
+						)
+					),
 					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: '/startcountdown' },
-						'StartCountDown'
-					)
-				),
-				_react2.default.createElement(
-					'li',
-					null,
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouterDom.Link,
+							{ to: '/startcountdown' },
+							'StartCountDown'
+						)
+					),
 					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: '/endcountdown' },
-						'EndCountDown'
-					)
-				),
-				_react2.default.createElement(
-					'li',
-					null,
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouterDom.Link,
+							{ to: '/endcountdown' },
+							'EndCountDown'
+						)
+					),
 					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: '/user/Leo' },
-						'Developer'
-					)
-				),
-				_react2.default.createElement(
-					'li',
-					null,
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouterDom.Link,
+							{ to: '/user/Leo' },
+							'Developer'
+						)
+					),
 					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: '/user/Jane' },
-						'Designer'
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouterDom.Link,
+							{ to: '/user/Jane' },
+							'Designer'
+						)
 					)
 				)
 			);
@@ -24122,9 +24126,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = __webpack_require__(24);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _Router = __webpack_require__(11);
 
 var _Router2 = _interopRequireDefault(_Router);
+
+var _reactRouterDom = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24137,23 +24147,112 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Home = function (_React$Component) {
 	_inherits(Home, _React$Component);
 
-	function Home() {
+	function Home(props) {
 		_classCallCheck(this, Home);
 
-		return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
+
+		_this.state = {
+			theTimeNow: '',
+			theDateNow: '',
+			theDayNow: '',
+			theWeekDayNow: ''
+		};
+		return _this;
 	}
 
 	_createClass(Home, [{
+		key: 'tick',
+		value: function tick() {
+			var week = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+
+			this.setState({
+				theTimeNow: new Date().toLocaleTimeString(),
+				theDateNow: new Date().getDate(),
+				theDayNow: new Date().getFullYear() + ' / ' + (new Date().getMonth() + 1),
+				theWeekDayNow: week[new Date().getDay()]
+			});
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			setInterval(this.tick.bind(this), 1000);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ className: 'home-background' },
 				_react2.default.createElement(_Router2.default, null),
 				_react2.default.createElement(
-					'h1',
-					null,
-					'Home'
+					'div',
+					{ className: 'container' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'title' },
+						_react2.default.createElement(
+							'h1',
+							null,
+							'The Moment Now'
+						),
+						_react2.default.createElement(
+							'h3',
+							null,
+							'\u300CThe joy and excitement we feel here and now are more important.\u300D'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'calendar' },
+						_react2.default.createElement(
+							'h3',
+							{ className: 'date' },
+							this.state.theDateNow
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'day' },
+							this.state.theDayNow
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'weekday' },
+							this.state.theWeekDayNow
+						),
+						_react2.default.createElement(
+							'h2',
+							{ className: 'time_now' },
+							this.state.theTimeNow
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'subtitle' },
+					_react2.default.createElement(
+						'h2',
+						null,
+						'What is your main focus for today?'
+					),
+					_react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouterDom.Link,
+							{ to: '/todolist' },
+							'Todo'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'footer' },
+					_react2.default.createElement(
+						'h4',
+						null,
+						'LeoKao x ReactJS'
+					)
 				)
 			);
 		}
@@ -24262,7 +24361,7 @@ var TodoList = function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ className: 'todolist-background' },
 				_react2.default.createElement(_Router2.default, null),
 				_react2.default.createElement(
 					'h1',

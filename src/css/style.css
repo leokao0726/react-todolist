@@ -1,0 +1,158 @@
+*{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#root {
+	font-family: 'Fjalla One', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, ul, li{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+
+}
+
+a{
+	text-decoration: none;
+}
+
+.container{
+	display: block;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.clearfix:after{
+    content: “”;
+    display: table;
+    clear: both;
+}
+
+/* nav */
+
+.nav{
+	height:60px;
+	width:100%;
+	background: rgba(1,1,1,0.1);
+}
+
+.list {
+	float: right;
+	line-height: 60px;
+}
+
+.list li{
+	display: inline;
+	padding: 0 10px;
+}
+
+.list li a {
+	text-transform: uppercase;
+	color: #ccc;
+}
+
+
+/* home */
+.home-background {
+	background-color: #4472C4;
+	height: 100vh;
+}
+
+.title{
+	color:white;
+	text-align: center;
+	margin: 50px auto;
+	line-height: 30px;
+	text-shadow: 2px 2px #666666;
+	
+}
+
+.calendar{
+	position: relative;
+	background-color: #ed7057;
+	width: 200px;
+	height: 300px;
+	padding: 20px;
+	margin: 0px auto;
+	box-shadow: 8px 6px #666666;
+	border-radius: 3px;
+	color: #ccc;
+
+}
+
+.date{
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0);
+	width: 120px;
+	height: 120px;
+	margin: 10px 0 20px 0;
+	background-color: white;
+	font-size: 60px;
+	text-align: center;	
+	line-height: 120px;
+	color: #525150;
+	border-radius: 6px;
+}
+
+.day{
+	text-align: center;
+
+}
+
+.weekday{
+	text-align: center;
+	font-size: 20px;
+	font-style: bolder;
+}
+
+.time_now{
+	background-color: white;
+	text-align: center;
+	margin: 10px auto;
+	padding: 10px 0;
+	border-radius: 6px;
+	color: #666;
+}
+
+.subtitle{
+	color:white;
+	text-align: center;
+	margin: 20px auto;
+	line-height: 40px;
+	text-shadow: 2px 2px #666666;
+}
+
+.subtitle a {
+	color: #272827;
+	font-size: 20px;
+}
+
+.footer{
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 40px;
+	background-color: #272827;
+}
+
+.footer h4{
+	float: right;
+	color: #ccc;
+	line-height: 40px;
+	margin: 0 20px 0 0;
+}
+
+/* todolist */
+.todolist-background{
+	background-color: #1A2A34;
+	height: 100vh;
+
+}
+
+
+
